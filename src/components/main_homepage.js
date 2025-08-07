@@ -3,159 +3,144 @@ import banner1 from "../assets/banner/banner1.jpg";
 import banner2 from "../assets/banner/banner2.jpg";
 import banner3 from "../assets/banner/banner3.jpg";
 import banner4 from "../assets/banner/banner4.jpg";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { fetchData } from "../util/helper";
+import noImage from "../assets/no_image.jpg";
 
 const MainHomePage = () => {
-   const navigate = useNavigate();
-   const [dataProduct, setDataProduct] = useState([]);
-   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [dataProduct, setDataProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-   const getProduct = () => {
-      setLoading(true);
-      fetchData("test_api/ecommerce", {}, "GET")
-         .then((res) => {
-            setDataProduct(res.data);
-            setLoading(false);
-         })
-         .catch((err) => {
-            setLoading(false);
-         });
-   };
-
-   useEffect(() => {
-      getProduct();
-   }, []);
-
-   const scrollup = () => {
-      window.scrollTo({
-         top: 0,
-         behavior: "instant",
+  const getProduct = () => {
+    setLoading(true);
+    fetchData("test_api/ecommerce", {}, "GET")
+      .then((res) => {
+        setDataProduct(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
       });
-   };
-   return (
-      <div id="main_homepage">
-         <div className="container w-100">
-            <div
-               id="carouselExampleControlsNoTouching"
-               className="banner_slide carousel slide"
-               data-bs-touch="false"
-            >
-               <div className="carousel-inner">
-                  <div className="carousel-item active">
-                     <img src={banner1} className="d-block w-100" alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                     <img src={banner2} className="d-block w-100" alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                     <img src={banner3} className="d-block w-100" alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                     <img src={banner4} className="d-block w-100" alt="..." />
-                  </div>
-               </div>
-               <button
-                  style={{ width: "80px" }}
-                  className="btn_banner carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carouselExampleControlsNoTouching"
-                  data-bs-slide="prev"
-               >
-                  <span
-                     className="carousel-control-prev-icon mb-5"
-                     aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Previous</span>
-               </button>
-               <button
-                  style={{ width: "80px" }}
-                  className="btn_banner carousel-control-next"
-                  type="button"
-                  data-bs-target="#carouselExampleControlsNoTouching"
-                  data-bs-slide="next"
-               >
-                  <span
-                     className="carousel-control-next-icon mb-5"
-                     aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Next</span>
-               </button>
-            </div>
-         </div>
-         <div id="gv_layout">
-            <div>
-               {loading && (
-                  <div className="d-flex justify-content-center mt-5">
-                     <div
-                        class="spinner-border text-primary text-center"
-                        role="status"
-                     >
-                        <span class="visually-hidden text-center">
-                           Loading...
-                        </span>
-                     </div>
-                  </div>
-               )}
+  };
 
-               <div className="gv_card_layout">
-                  {dataProduct.map((items) => {
-                     return (
-                        <div
-                           productItem={items}
-                           key={items.id}
-                           className="bg-white p-3 rounded-0 position-relative pb-5"
-                           style={{ width: "18rem" }}
-                        >
-                           <a
-                              onClick={() => navigate("/nav_relate_category")}
-                              className="text-dark"
-                              href=""
-                           >
-                              <h4 className="fw-bold fs-5"> {items.name} </h4>
-                              <img
-                                 src={items.product}
-                                 class="card-img-top"
-                                 alt="..."
-                              />
-                              <p
-                                 style={{ width: "220px" }}
-                                 className="position-absolute start-0 end-100 ms-3"
-                              >
-                                 See more
-                              </p>
-                           </a>
-                        </div>
-                     );
-                  })}
-               </div>
-               <div className="product_slide_layout mt-3 p-3">
-                  <h4>Best Sellers in Computers & Accessories</h4>
-                  <div className="product_group_slide p-3">
-                     {dataProduct.map((item) => {
-                        return (
-                           <div key={item.id} className="product_slide me-3">
-                              <a
-                                 onClick={() =>
-                                    navigate("/nav_relate_category")
-                                 }
-                                 href="#"
-                              >
-                                 <img width={200} src={item.product} alt="" />
-                              </a>
-                           </div>
-                        );
-                     })}
-                  </div>
-               </div>
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const scrollup = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+  return (
+    <div id="main_homepage">
+      <div className="container w-100">
+        <div
+          id="carouselExampleControlsNoTouching"
+          className="banner_slide carousel slide"
+          data-bs-touch="false"
+        >
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src={banner1} className="d-block w-100" alt="..." />
             </div>
-         </div>
-         <button onClick={() => scrollup()} className="back_to_top">
-            Back to Top
-         </button>
+            <div className="carousel-item">
+              <img src={banner2} className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src={banner3} className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src={banner4} className="d-block w-100" alt="..." />
+            </div>
+          </div>
+          <button
+            style={{ width: "80px" }}
+            className="btn_banner carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon mb-5"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            style={{ width: "80px" }}
+            className="btn_banner carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon mb-5"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
-   );
+      <div className="container">
+        <div className="row justify-content-center gv_card_layout">
+          {dataProduct?.map((items) => {
+            return (
+              <div
+                key={items.id}
+                className="col-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center mb-4"
+              >
+                <div
+                  className="card shadow-sm border-0 h-100"
+                  style={{
+                    width: "100%",
+                    maxWidth: "18rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => navigate("/nav_relate_category")}
+                >
+                  <img
+                    src={items.product}
+                    alt={items.name}
+                    className="card-img-top"
+                    style={{ height: "180px", objectFit: "cover" }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = noImage; // Replace with your actual path
+                    }}
+                  />
+
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title fw-semibold text-truncate">
+                      {items.name}
+                    </h5>
+                    <p className="text-muted small mb-2">
+                      {items.description || "Short product description..."}
+                    </p>
+
+                    <div className="mt-auto d-flex justify-content-between align-items-center">
+                      <span className="fw-bold text-primary">
+                        ${items.price || "19.99"}
+                      </span>
+                      <span className="see-more-link text-decoration-none text-primary small">
+                        See more →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <button onClick={() => scrollup()} className="back_to_top">
+        Back to Top
+      </button>
+    </div>
+  );
 };
 
 export default MainHomePage;

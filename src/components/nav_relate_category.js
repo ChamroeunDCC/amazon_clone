@@ -4,19 +4,18 @@ import NavGroupCategory from "./nav_group_category";
 import NavBar from "./navbar";
 
 const RelateCategory = () => {
-    return ( 
-        <>
-            <div id="nav_relate_category">
-                <Header/>
-                <NavBar/>
-                <NavGroupCategory/>
-            </div>
-            <div id="product_category">
-                <ProductCategory/>
-            </div>
-        </>
-        
-     );
-}
- 
+  return (
+    <>
+      <div id="nav_relate_category">
+        <Header />
+        <NavBar />
+        <NavGroupCategory />
+      </div>
+      <div id="product_category">
+        <ProductCategory />
+      </div>
+    </>
+  );
+};
+
 export default RelateCategory;
