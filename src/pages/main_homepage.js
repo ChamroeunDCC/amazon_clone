@@ -6,6 +6,7 @@ import banner4 from "../assets/banner/banner4.jpg";
 import { useNavigate } from "react-router-dom";
 import { fetchData } from "../util/helper";
 import noImage from "../assets/no_image.jpg";
+import ItachiSharingan from "../components/loading";
 
 const MainHomePage = () => {
   const navigate = useNavigate();
@@ -86,59 +87,76 @@ const MainHomePage = () => {
       </div>
       <div className="container">
         <div className="row justify-content-center gv_card_layout">
-          {dataProduct?.map((items) => {
-            return (
-              <div
-                key={items.id}
-                className="col-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center mb-4"
-              >
-                <div
-                  className="card shadow-sm border-0 h-100"
-                  style={{
-                    width: "100%",
-                    maxWidth: "18rem",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => navigate("/nav_relate_category")}
-                >
-                  <img
-                    src={items.product}
-                    alt={items.name}
-                    className="card-img-top"
-                    style={{ height: "180px", objectFit: "cover" }}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = noImage; // Replace with your actual path
-                    }}
-                  />
+          {loading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "calc(100vh - 500px)",
+              }}
+            >
+              <ItachiSharingan />
+            </div>
+          ) : (
+            <>
+              {dataProduct?.map((items) => {
+                return (
+                  <div
+                    key={items.id}
+                    className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center mb-4"
+                  >
+                    <div
+                      className="card shadow-sm border-0 h-100"
+                      style={{
+                        width: "100%",
+                        maxWidth: "18rem",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => navigate("/nav_relate_category")}
+                    >
+                      <img
+                        src={items.product}
+                        alt={items.name}
+                        className="card-img-top"
+                        style={{ height: "180px", objectFit: "cover" }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = noImage; // Replace with your actual path
+                        }}
+                      />
 
-                  <div className="card-body d-flex flex-column">
-                    <h5 className="card-title fw-semibold text-truncate">
-                      {items.name}
-                    </h5>
-                    <p className="text-muted small mb-2">
-                      {items.description || "Short product description..."}
-                    </p>
+                      <div className="card-body d-flex flex-column">
+                        <h5 className="card-title fw-semibold text-truncate">
+                          {items.name}
+                        </h5>
+                        <p className="text-muted small mb-2">
+                          {items.description || "Short product description..."}
+                        </p>
 
-                    <div className="mt-auto d-flex justify-content-between align-items-center">
-                      <span className="fw-bold text-primary">
-                        ${items.price || "19.99"}
-                      </span>
-                      <span className="see-more-link text-decoration-none text-primary small">
-                        See more →
-                      </span>
+                        <div className="row">
+                          {/* <span className="col-12 col-md-6 fw-bold text-primary">
+                            ${items.price || "19.99"}
+                          </span> */}
+                          <span className="see-more-link text-decoration-none text-primary small">
+                            See more →
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
 
-      <button onClick={() => scrollup()} className="back_to_top">
-        Back to Top
-      </button>
+      {!loading && (
+        <button onClick={() => scrollup()} className="back_to_top">
+          Back to Top
+        </button>
+      )}
     </div>
   );
 };

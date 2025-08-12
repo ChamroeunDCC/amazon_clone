@@ -13,9 +13,10 @@ const ProductCategory = () => {
       >
         {/* Toggle button */}
         <button
-          className={`btn btn-primary rounded-pill filter-toggle-btn d-lg-none ${
+          className={`btn btn-primary rounded-pill filter-toggle-btn d-lg-none d-flex justify-content-center align-items-center ${
             showSidebar ? "active" : ""
           }`}
+          style={{ width: 40, height: 40 }}
           onClick={() => setShowSidebar(!showSidebar)}
           aria-expanded={showSidebar}
           aria-label="Toggle Filters"
@@ -23,7 +24,7 @@ const ProductCategory = () => {
           {showSidebar ? (
             <i className="fa-solid fa-filter-circle-xmark"></i> // no filter / clear filter icon
           ) : (
-            <i className="fa-solid fa-filter"></i> // filter icon
+            <i className="fa-solid fa-filter"></i> //
           )}
         </button>
 

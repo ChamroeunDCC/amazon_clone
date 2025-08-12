@@ -22,9 +22,18 @@
   text-overflow: ellipsis;
 }
 
+/* For all browsers */
+.scroll {
+  overflow-x: auto; /* enable horizontal scrolling */
+  overflow-y: hidden; /* hide vertical scroll */
+  -webkit-overflow-scrolling: touch; /* smooth mobile scrolling */
+  scrollbar-width: thin; /* Firefox thin scrollbar */
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
 /* For WebKit browsers */
 .scroll::-webkit-scrollbar {
-  height: 6px; /* smaller height for horizontal scrollbar */
+  height: 6px; /* smaller horizontal scrollbar height */
 }
 
 .scroll::-webkit-scrollbar-track {
@@ -34,13 +43,6 @@
 .scroll::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 3px;
-}
-
-/* For Firefox */
-.scroll {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-  overflow: auto;
 }
 
 /* ====================== Header ====================== */
@@ -231,12 +233,12 @@
   border-bottom: 2px solid orange;
 }
 
-#nav_relate_category .nav_group ul li a {
+#nav_relate_category .nav_group ul li span {
   padding: 5px 10px;
   color: #6d3333;
 }
 
-#nav_relate_category .nav_group ul li a:hover {
+#nav_relate_category .nav_group ul li span:hover {
   color: orange;
 }
 
@@ -379,6 +381,35 @@
   text-decoration: underline;
   color: #0d6efd;
   cursor: pointer;
+}
+
+/* Style Loading Spinner */
+
+.triangle-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* adjust as needed */
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 40px solid #ff6f61; /* built-in color */
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(100%);
+  }
+  100% {
+    transform: scale(1.2) rotate(10deg);
+    filter: brightness(130%);
+  }
 }
 
 /* ==================== Single Product ================ */

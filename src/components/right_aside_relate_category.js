@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import test_product from "../assets/test_product.jpg";
 import { Link } from "react-router-dom";
 import { fetchData } from "../util/helper";
+import ItachiSharingan from "./loading";
 
 const RightAsideRelateCategory = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -22,19 +23,9 @@ const RightAsideRelateCategory = () => {
   useEffect(() => {
     getProduct();
   }, []);
-  // axios.get('https://6524af9bea560a22a4ea00cf.mockapi.io/test_api/ecommerce')
-  //     .then(res=>{
-  //         setDataProduct(res.data)
-  //         setLoading(false)
-  //     })
-  //     .catch(err=> {
-  //         console.log(err)
-  //         setLoading(false)
-  //     })
-  // console.log(dataProduct)
 
   return (
-    <div id="right_aside_relate_category" className="container-fluid">
+    <div id="right_aside_relate_category" className="container-fluid mt-3">
       <div className="inner_right_aside_relate_category">
         <h5 className="fw-bold text-dark">Results</h5>
         <p style={{ fontSize: "14px", lineHeight: "10px" }}>
@@ -42,24 +33,27 @@ const RightAsideRelateCategory = () => {
         </p>
         {loading && (
           <div
-            className="spinner-border text-primary text-center"
-            role="status"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "calc(100vh - 200px)",
+            }}
           >
-            <span className="visually-hidden">Loading...</span>
+            <ItachiSharingan />
           </div>
         )}
 
-        <div className="group_items row gx-3 gy-3">
+        <div className="group_items row gx-3 gy-3 w-100">
           {dataProduct.map((items) => (
             <div
               key={items.id}
-              className="col-6 xs-col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center"
-              style={{ height: "550px" }}
+              className="col-12 xs-col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2 d-flex justify-content-center border"
             >
-              <div className="cart w-100">
+              <div className="cart">
                 <div className="inner_cart p-2 d-flex flex-column h-100">
                   <Link
-                    to={`/nav_relate_category/single_product/${items.id}`}
+                    to={`/nav_relate_category/product_detail?id=${items.id}`}
                     className="text-decoration-none text-dark h-100 d-flex flex-column"
                   >
                     <div className="d-flex justify-content-center">
@@ -78,7 +72,7 @@ const RightAsideRelateCategory = () => {
                     </h6>
 
                     <div className="star_rate mt-2">
-                      <a href="#">
+                      <div>
                         <i className="fa-solid fa-star"></i>
                         <i className="fa-solid fa-star"></i>
                         <i className="fa-solid fa-star"></i>
@@ -87,7 +81,7 @@ const RightAsideRelateCategory = () => {
                         <label style={{ fontSize: "12px", marginLeft: "5px" }}>
                           & Up
                         </label>
-                      </a>
+                      </div>
                     </div>
 
                     <span className="d-flex text-dark mt-2">
@@ -96,22 +90,22 @@ const RightAsideRelateCategory = () => {
                       </span>
                       <span className="fs-4">{items.price}</span>
                     </span>
-                  </Link>
 
-                  <div className="delivery mt-2 text-dark">
-                    <p style={{ lineHeight: "4px", fontSize: "13px" }}>
-                      Delivery <strong>Tue, Nov 7</strong>
-                    </p>
-                    <p style={{ lineHeight: "4px", fontSize: "12px" }}>
-                      ships to Cambodia
-                    </p>
-                    <p
-                      style={{ lineHeight: "4px", fontSize: "13px" }}
-                      className="fw-semibold"
-                    >
-                      Ages: 12 months and up
-                    </p>
-                  </div>
+                    <div className="delivery mt-2 text-dark">
+                      <p style={{ lineHeight: "4px", fontSize: "13px" }}>
+                        Delivery <strong>Tue, Nov 7</strong>
+                      </p>
+                      <p style={{ lineHeight: "4px", fontSize: "12px" }}>
+                        ships to Cambodia
+                      </p>
+                      <p
+                        style={{ lineHeight: "4px", fontSize: "13px" }}
+                        className="fw-semibold"
+                      >
+                        Ages: 12 months and up
+                      </p>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>

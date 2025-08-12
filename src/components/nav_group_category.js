@@ -11,16 +11,15 @@ const NavGroupCategory = () => {
 
   return (
     <nav className="nav_group bg-white border-bottom shadow-sm scroll">
-      <ul className="nav flex-row flex-nowrap">
+      <ul className="nav d-flex flex-nowrap">
         {items.map((item, idx) => (
           <li className="nav-item" key={idx}>
-            <a
-              href="#"
+            <span
               className="nav-link text-muted px-3"
               style={{ whiteSpace: "nowrap" }}
             >
               {item}
-            </a>
+            </span>
           </li>
         ))}
       </ul>

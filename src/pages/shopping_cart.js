@@ -1,57 +1,135 @@
-import Header from "../components/header";
-import NavBar from "../components/navbar";
-import test_product from '../assets/test_product.jpg'
+import { useEffect, useState } from "react";
+import test_product from "../assets/test_product.jpg";
+import Layout from "../layout/layout";
 
 const ShoppingCart = () => {
-    return ( 
-        <>
-            <Header/>
-            <NavBar/>
-            <div style={{backgroundColor:'#EAEDED'}} className="p-3" id="shopping_cart">
-                <div className="d-flex justify-content-center">
-                    <div className="layout_shopping_cart bg-white p-3">
-                        <div className="content_shopping_cart">
-                            <div className="product_layout pb-3 border-bottom">
-                                <div className="txt_shopping_cart">
-                                    <p>total Items : 1 </p>
-                                    <h3 className="text-dark">Shopping Cart</h3>
-                                    <p style={{fontSize:'12px',lineHeight:'4px'}}>Deselect all items</p>
-                                    <hr />
-                                </div>
-                                <div className="product_item row">
-                                    <div className="img_product col-4 text-center">
-                                        <img width={200} src={test_product} alt="" />
-                                    </div>
-                                    <div className="product_detail col-8">
-                                        <p>Bose QuietComfort 45 Wireless Bluetooth Noise Cancelling Headphones, Over-Ear Headphones with Microphone, Personalized Noise Cancellation and Sound</p>
-                                        <p><strong>$1222</strong></p>
-                                        <p className="fw-bold" style={{lineHeight:'1px',fontSize:'12px'}}>Used: Like New</p>
-                                        <p style={{lineHeight:'1px',fontSize:'12px'}}><strong>color:</strong></p>
-                                        <p style={{lineHeight:'1px',fontSize:'12px'}}><strong>Qty : 1</strong></p>
-                                        
-                                        <div className="d-flex justify-content-center">
-                                            <a style={{color:'#EAEDED',fontSize:'12px'}} className="ms-3 text-dark">| Delete |</a>
-                                        </div>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="d-flex justify-content-end pt-2">
-                                <h6>Subtotal (1 item): <b>$12121</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={{height:'120px'}} className="checkout_content bg-white ms-3 p-3">
-                        <h5 className="text-dark" style={{fontSize:'18px'}}>Subtotal (itmes): <b>$227.00</b></h5> 
-                        <div className="d-flex">
-                            <button style={{fontSize:'12px', backgroundColor:'#FCD831'}} className="rounded w-100 border-0 p-1">Procced to checkout</button>  
-                        </div>    
-                    </div>
+  const [cart, setCart] = useState([]);
+
+  const handleDelete = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  // Calculate subtotal
+  const subtotal = cart.reduce(
+    (total, item) => total + item.price * item.qty,
+    0
+  );
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cart");
+      if (savedCart) {
+        setCart(JSON.parse(savedCart));
+      }
+    }
+  }, []);
+
+  return (
+    <div
+      style={{ backgroundColor: "#EAEDED" }}
+      className="p-3"
+      id="shopping_cart"
+    >
+      <div className="container">
+        <div className="row">
+          {/* Cart Items */}
+          <div className="col-lg-9 col-md-8">
+            <div className="bg-white p-3 shadow-sm rounded">
+              <div className="mb-3 border-bottom pb-2">
+                <p className="mb-1 text-secondary">
+                  Total Items: {cart.length}
+                </p>
+                <h4 className="text-dark mb-1">Shopping Cart</h4>
+                <small
+                  className="text-primary cursor-pointer"
+                  onClick={() => {
+                    setCart([]);
+                    localStorage.removeItem("cart");
+                  }}
+                >
+                  Deselect all items
+                </small>
+              </div>
+
+              {/* Products */}
+              {cart.length === 0 && (
+                <p className="text-center text-muted">Your cart is empty.</p>
+              )}
+
+              {cart.map((item) => (
+                <div
+                  className="row border-bottom pb-3 mb-3 align-items-start"
+                  key={item.id}
+                >
+                  <div className="col-12 col-md-4 text-center">
+                    <img
+                      className="img-fluid"
+                      src={item.image || test_product}
+                      alt={item.name}
+                      style={{ maxWidth: "200px" }}
+                    />
+                  </div>
+                  <div className="col-12 col-md-8">
+                    <p className="mb-2">{item.name}</p>
+                    <h6 className="mb-2 text-dark">
+                      ${item.price ? Number(item.price).toFixed(2) : "0.00"}
+                    </h6>
+                    <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>
+                      <b>Condition:</b> {item.condition || "N/A"}
+                    </p>
+                    <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>
+                      <b>Color:</b> {item.color || "N/A"}
+                    </p>
+                    <p className="mb-2 text-muted" style={{ fontSize: "12px" }}>
+                      <b>Qty:</b> {item.qty}
+                    </p>
+
+                    <button
+                      className="btn btn-link text-danger p-0"
+                      style={{ fontSize: "12px" }}
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
+              ))}
+
+              {/* Subtotal */}
+              {cart.length > 0 && (
+                <div className="text-end">
+                  <h6>
+                    Subtotal ({cart.length} item
+                    {cart.length > 1 ? "s" : ""}): <b>${subtotal.toFixed(2)}</b>
+                  </h6>
+                </div>
+              )}
             </div>
-            
-        </>
-     );
-}
- 
+          </div>
+
+          {/* Checkout */}
+          <div className="col-lg-3 col-md-4 mt-3 mt-md-0">
+            <div className="bg-white p-3 shadow-sm rounded">
+              <h6 className="text-dark">
+                Subtotal (items): <b>${subtotal.toFixed(2)}</b>
+              </h6>
+              <button
+                style={{ fontSize: "14px", backgroundColor: "#FCD831" }}
+                className="btn w-100 mt-2 border-0"
+                disabled={cart.length === 0}
+                onClick={() => alert("Proceeding to checkout...")}
+              >
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default ShoppingCart;

@@ -1,142 +1,142 @@
 export default function LeftAsideRelateCategory() {
   return (
-    <div className="left_aside_relate_category">
+    <div className="left_aside_relate_category mt-3">
       <div className="inner_left_aside container">
         <h6 className="fw-bold">Department</h6>
         <ul>
           <li>
-            <a href="">Toys & Games</a>
+            <div>Toys & Games</div>
           </li>
           <li>
-            <a href="">Baby & Crafts Supplies</a>
+            <div>Baby & Crafts Supplies</div>
           </li>
           <li>
-            <a href="">Building Toys</a>
+            <div>Building Toys</div>
           </li>
           <li>
-            <a href="">Dolls & Accessories</a>
+            <div>Dolls & Accessories</div>
           </li>
           <li>
-            <a href="">Kid's Dress Up & Pretend Play</a>
+            <div>Kid's Dress Up & Pretend Play</div>
           </li>
           <li>
-            <a href="">Games & Acessories</a>
+            <div>Games & Acessories</div>
           </li>
           <li>
-            <a href="">Kid's Electronics</a>
+            <div>Kid's Electronics</div>
           </li>
           <li>
-            <a href="">Learning & Education Toys</a>
+            <div>Learning & Education Toys</div>
           </li>
           <li>
-            <a href="">Novelty Toys & Amusements</a>
+            <div>Novelty Toys & Amusements</div>
           </li>
           <li>
-            <a href="">Kid's Party Supplies</a>
+            <div>Kid's Party Supplies</div>
           </li>
           <li>
-            <a href="">Puppets & Puppet Theaters</a>
+            <div>Puppets & Puppet Theaters</div>
           </li>
           <li>
-            <a href="">Puzzles</a>
+            <div>Puzzles</div>
           </li>
           <li>
-            <a href="">Hobby remote & App Controlled</a>
+            <div>Hobby remote & App Controlled</div>
           </li>
           <li>
-            <a href="">Sports & Outdoor Play Toys</a>
+            <div>Sports & Outdoor Play Toys</div>
           </li>
           <li>
-            <a href="">Toy Figures & Playsets</a>
+            <div>Toy Figures & Playsets</div>
           </li>
           <li>
-            <a href="">Tricycles, Scooters & Wagons</a>
+            <div>Tricycles, Scooters & Wagons</div>
           </li>
         </ul>
 
         <h6 className="fw-bold">Feature Characters & Brands</h6>
         <ul>
           <li>
-            <a href="">Barbie</a>
+            <div>Barbie</div>
           </li>
           <li>
-            <a href="">Star wars</a>
+            <div>Star wars</div>
           </li>
           <li>
-            <a href="">Marvel</a>
+            <div>Marvel</div>
           </li>
           <li>
-            <a href="">Pokemon</a>
+            <div>Pokemon</div>
           </li>
           <li>
-            <a href="">Disney Princess</a>
+            <div>Disney Princess</div>
           </li>
           <li>
-            <a href="">Little People</a>
+            <div>Little People</div>
           </li>
           <li>
-            <a href="">Lego Minifigures</a>
+            <div>Lego Minifigures</div>
           </li>
         </ul>
 
         <h6 className="fw-bold">Customer Reviews</h6>
         <div className="star_rate">
-          <a className="ms-4" href="#">
+          <div className="ms-4">
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <label style={{ fontSize: "12px", marginLeft: "5px" }}> & Up</label>
-          </a>
+          </div>
         </div>
         <div className="star_rate">
-          <a className="ms-4" href="#">
+          <div className="ms-4">
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <label style={{ fontSize: "12px", marginLeft: "5px" }}> & Up</label>
-          </a>
+          </div>
         </div>
         <div className="star_rate">
-          <a className="ms-4" href="#">
+          <div className="ms-4">
             <i className="fa-solid fa-star"></i>
             <i className="fa-solid fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <label style={{ fontSize: "12px", marginLeft: "5px" }}> & Up</label>
-          </a>
+          </div>
         </div>
         <div className="star_rate">
-          <a className="ms-4" href="#">
+          <div className="ms-4">
             <i className="fa-solid fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <i className="fa-regular fa-star"></i>
             <label style={{ fontSize: "12px", marginLeft: "5px" }}> & Up</label>
-          </a>
+          </div>
         </div>
 
         <h6 className="fw-bold mt-2">Price</h6>
         <ul>
           <li>
-            <a href="">Under 25$</a>
+            <div>Under 25$</div>
           </li>
           <li>
-            <a href="">25$ - 50$</a>
+            <div>25$ - 50$</div>
           </li>
           <li>
-            <a href="">50$ - 100$</a>
+            <div>50$ - 100$</div>
           </li>
           <li>
-            <a href="">100 - 200$</a>
+            <div>100 - 200$</div>
           </li>
           <li>
-            <a href="">200 - Above</a>
+            <div>200 - Above</div>
           </li>
         </ul>
         <div>

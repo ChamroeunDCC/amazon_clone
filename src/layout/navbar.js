@@ -1,8 +1,12 @@
 const NavBar = () => {
   return (
     <div id="nav_bar">
-      <div className="nav_item d-flex align-items-center">
+      <div
+        className="nav_item d-flex align-items-center w-100 scroll"
+        style={{ gap: "10px", flexWrap: "nowrap" }}
+      >
         <a
+          style={{ whiteSpace: "nowrap" }}
           className="btn_nav_bar"
           type="button"
           data-bs-toggle="offcanvas"
@@ -36,11 +40,21 @@ const NavBar = () => {
             </p>
           </div>
         </div>
-        <a className="btn_nav_bar">Today's Deals</a>
-        <a className="btn_nav_bar">Customer Service</a>
-        <a className="btn_nav_bar">Registry</a>
-        <a className="btn_nav_bar">Gift Cards</a>
-        <a className="btn_nav_bar">Sell</a>
+        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
+          Today's Deals
+        </a>
+        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
+          Customer Service
+        </a>
+        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
+          Registry
+        </a>
+        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
+          Gift Cards
+        </a>
+        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
+          Sell
+        </a>
       </div>
     </div>
   );
