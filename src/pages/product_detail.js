@@ -1,70 +1,56 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import img_product from "../assets/single_product1.jpg";
 import ReactImageMagnify from "react-image-magnify";
 import { useEffect, useState } from "react";
 import { fetchData } from "../util/helper";
 import LoadingItachiSharingan from "../components/loading";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 const ProductDetail = () => {
   const [loading, setLoading] = useState(false);
+  const [singleData, setSingleData] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Get ID from query param
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const id = params.get("id");
-  // Load cart from localStorage or start with empty array
-  const [cart, setCart] = useState(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cart");
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-    return [];
-  });
 
-  // Add product to cart and save to localStorage
+  // Add product to Redux cart
   const addToCart = () => {
+    if (!singleData.id) return;
+
     const productToAdd = {
       id: singleData.id,
       name: singleData.name,
+      description: singleData.description,
       price: singleData.price,
       qty: 1,
       image: img_product,
     };
 
-    // Check if product already exists in cart
-    const existingIndex = cart.findIndex((item) => item.id === productToAdd.id);
-    let updatedCart = [];
-
-    if (existingIndex >= 0) {
-      // Update quantity
-      updatedCart = [...cart];
-      updatedCart[existingIndex].qty += 1;
-    } else {
-      updatedCart = [...cart, productToAdd];
-    }
-
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    dispatch(addItem(productToAdd));
   };
 
-  const [singleData, setSingleData] = useState([]);
-
+  // Fetch product details
   const getProductById = () => {
     setLoading(true);
     fetchData(`test_api/ecommerce/${id}`, {}, "GET")
       .then((res) => {
         setSingleData(res.data);
         setLoading(false);
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
       });
   };
 
   useEffect(() => {
     getProductById();
-  }, []);
+  }, [id]);
 
   return (
     <div
@@ -95,12 +81,12 @@ const ProductDetail = () => {
                 <ReactImageMagnify
                   {...{
                     smallImage: {
-                      alt: singleData.name,
+                      alt: singleData.picture,
                       isFluidWidth: true,
-                      src: img_product,
+                      src: singleData.picture,
                     },
                     largeImage: {
-                      src: img_product,
+                      src: singleData.picture,
                       width: 1200,
                       height: 1800,
                     },
@@ -110,11 +96,8 @@ const ProductDetail = () => {
 
               {/* Product Details */}
               <div className="col-lg-5 col-md-6 col-sm-12">
-                <h4 className="text-dark fw-semibold">
-                  {singleData.name} : LEGO Super Mario Character Packs – Series
-                  6 71413, Collectible Mystery Toy Figures for Kids, Combine
-                  with Starter Course Playset for Extra Play
-                </h4>
+                <h4 className="text-dark fw-semibold">{singleData.name}</h4>
+                <h4 className="text-dark ">{singleData.description}</h4>
 
                 {/* Price */}
                 <div className="mt-3">
@@ -143,9 +126,8 @@ const ProductDetail = () => {
                 {/* Description */}
                 <ul className="ps-3">
                   <li style={{ fontSize: "14px" }}>
-                    Surprise a child with 1 of 8 Super Mario figures in each
-                    Series 5 Character Pack, containing buildable toy characters
-                    with an Action Tag.
+                    Surprise a child with a fun collectible figure and buildable
+                    toy character.
                   </li>
                 </ul>
               </div>

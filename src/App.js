@@ -16,8 +16,8 @@ function App() {
             element={<SingleProduct />}
           />
           <Route path="/shopping_cart" element={<ShoppingCart />} />
+          <Route path="/nav_relate_category" element={<NavRelateCategory />} />
         </Route>
-        <Route path="/nav_relate_category" element={<NavRelateCategory />} />
       </Routes>
     </BrowserRouter>
   );

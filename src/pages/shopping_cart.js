@@ -1,31 +1,28 @@
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeItem,
+  clearCart,
+  increaseQty,
+  decreaseQty,
+} from "../features/cart/cartSlice";
 import test_product from "../assets/test_product.jpg";
-import Layout from "../layout/layout";
+import { useState } from "react";
 
 const ShoppingCart = () => {
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
 
-  const handleDelete = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const [showModal, setShowModal] = useState(false);
+
+  const handleConfirm = () => {
+    dispatch(clearCart());
+    setShowModal(false);
   };
 
-  // Calculate subtotal
   const subtotal = cart.reduce(
-    (total, item) => total + item.price * item.qty,
+    (total, item) => total + Number(item.price) * item.qty,
     0
   );
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        setCart(JSON.parse(savedCart));
-      }
-    }
-  }, []);
 
   return (
     <div
@@ -45,16 +42,52 @@ const ShoppingCart = () => {
                 <h4 className="text-dark mb-1">Shopping Cart</h4>
                 <small
                   className="text-primary cursor-pointer"
-                  onClick={() => {
-                    setCart([]);
-                    localStorage.removeItem("cart");
-                  }}
+                  onClick={() => setShowModal(true)}
                 >
                   Deselect all items
                 </small>
+                <div
+                  className={`modal fade ${showModal ? "show d-block" : ""}`}
+                  tabIndex="-1"
+                  role="dialog"
+                >
+                  <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title">Confirm</h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          onClick={() => setShowModal(false)}
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <p>Are you sure you want to deselect all items?</p>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          onClick={() => setShowModal(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={handleConfirm}
+                        >
+                          Yes, clear
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Backdrop */}
+                {showModal && <div className="modal-backdrop fade show"></div>}
               </div>
 
-              {/* Products */}
               {cart.length === 0 && (
                 <p className="text-center text-muted">Your cart is empty.</p>
               )}
@@ -77,20 +110,29 @@ const ShoppingCart = () => {
                     <h6 className="mb-2 text-dark">
                       ${item.price ? Number(item.price).toFixed(2) : "0.00"}
                     </h6>
-                    <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>
-                      <b>Condition:</b> {item.condition || "N/A"}
-                    </p>
-                    <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>
-                      <b>Color:</b> {item.color || "N/A"}
-                    </p>
-                    <p className="mb-2 text-muted" style={{ fontSize: "12px" }}>
-                      <b>Qty:</b> {item.qty}
-                    </p>
+
+                    {/* Qty Controls */}
+                    <div className="d-flex align-items-center mb-2">
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => dispatch(decreaseQty(item.id))}
+                        disabled={item.qty <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="mx-2">{item.qty}</span>
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => dispatch(increaseQty(item.id))}
+                      >
+                        +
+                      </button>
+                    </div>
 
                     <button
                       className="btn btn-link text-danger p-0"
                       style={{ fontSize: "12px" }}
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => dispatch(removeItem(item.id))}
                     >
                       Delete
                     </button>
@@ -98,12 +140,11 @@ const ShoppingCart = () => {
                 </div>
               ))}
 
-              {/* Subtotal */}
               {cart.length > 0 && (
                 <div className="text-end">
                   <h6>
-                    Subtotal ({cart.length} item
-                    {cart.length > 1 ? "s" : ""}): <b>${subtotal.toFixed(2)}</b>
+                    Subtotal ({cart.length} item{cart.length > 1 ? "s" : ""}):{" "}
+                    <b>${subtotal.toFixed(2)}</b>
                   </h6>
                 </div>
               )}

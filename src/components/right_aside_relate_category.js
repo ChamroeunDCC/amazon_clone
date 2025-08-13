@@ -3,6 +3,7 @@ import test_product from "../assets/test_product.jpg";
 import { Link } from "react-router-dom";
 import { fetchData } from "../util/helper";
 import ItachiSharingan from "./loading";
+import ScrollToTop from "./srollTotTop";
 
 const RightAsideRelateCategory = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -59,16 +60,15 @@ const RightAsideRelateCategory = () => {
                     <div className="d-flex justify-content-center">
                       <img
                         className="bg-secondary img-fluid"
-                        src={test_product}
+                        src={items.picture}
                         alt=""
                         style={{ maxWidth: "100%", height: "auto" }}
                       />
                     </div>
 
-                    <h6 className="text-break mt-3 line-clamp-3">
-                      {items.name}: LEGO Super Mario Character Packs – Series 6
-                      71413, Collectible Mystery Toy Figures for Kids, Combine
-                      with Starter Course Playset for Extra Play
+                    <h5 className="mt-3 line-clamp-3 ">{items.name}</h5>
+                    <h6 className="text-break line-clamp-3">
+                      {items.description}
                     </h6>
 
                     <div className="star_rate mt-2">
@@ -111,6 +111,8 @@ const RightAsideRelateCategory = () => {
             </div>
           ))}
         </div>
+
+        {!loading && <ScrollToTop />}
       </div>
     </div>
   );

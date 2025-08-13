@@ -1,22 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import amazon_logo from "../assets/logo/amazon_logo.png";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import SwitchLang from "../components/switch-lang/SwitchLang";
+import SwitchLangSheet from "../components/switch-lang/SwitchLangSheet";
 
 const Header = () => {
   const navigate = useNavigate();
-
-  const [cartCount, setCartCount] = useState(0);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        const cart = JSON.parse(savedCart);
-        // Sum qty of all items
-        const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-        setCartCount(totalQty);
-      }
-    }
-  }, [cartCount]);
+  const cart = useSelector((state) => state.cart.items); // items from Redux slice
+  const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   return (
     <header
@@ -92,9 +84,8 @@ const Header = () => {
         {/* Right */}
         <div id="nav_right">
           <div className="d-none d-md-flex nav_tools ms-2 align-items-center mb-2">
-            <div href="" className="d-flex ms-4 mt-2 text-white">
-              <span className="me-1 fi fi-us"></span>
-              <span className="dropdown-toggle">EN</span>
+            <div className="d-flex align-items-center">
+              <SwitchLang />
             </div>
             <div
               href=""
@@ -127,9 +118,15 @@ const Header = () => {
                 >
                   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
-                <span className="position-absolute top-0 start-100 text-warning fw-bold fs-6">
+                <motion.span
+                  key={cartCount} // triggers animation on value change
+                  initial={{ x: 0 }}
+                  animate={{ x: [0, -5, 5, -5, 5, 0] }} // shake animation
+                  transition={{ duration: 0.4 }}
+                  className="position-absolute top-0 start-100 text-warning fw-bold fs-6"
+                >
                   {cartCount}
-                </span>
+                </motion.span>
               </span>
               <div className="ms-2 mt-2">
                 <span className="line-2">Cart</span>
@@ -162,16 +159,6 @@ const Header = () => {
         </div>
 
         <div className="offcanvas-body">
-          {/* Language Switcher */}
-          <div className="d-flex align-items-center mb-3">
-            <span className="me-2 fi fi-us"></span>
-            <select className="form-select form-select-sm w-auto">
-              <option value="EN">EN</option>
-              <option value="KH">KH</option>
-              <option value="FR">FR</option>
-            </select>
-          </div>
-
           {/* Search Bar */}
           <div className="input-group mb-3">
             <input
@@ -183,6 +170,8 @@ const Header = () => {
               <i className="fas fa-search"></i>
             </button>
           </div>
+
+          <SwitchLangSheet />
 
           {/* Deliver Location */}
           <div className="d-flex align-items-center mb-3">

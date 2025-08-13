@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchData } from "../util/helper";
 import noImage from "../assets/no_image.jpg";
 import ItachiSharingan from "../components/loading";
+import ScrollToTop from "../components/srollTotTop";
 
 const MainHomePage = () => {
   const navigate = useNavigate();
@@ -116,7 +117,7 @@ const MainHomePage = () => {
                       onClick={() => navigate("/nav_relate_category")}
                     >
                       <img
-                        src={items.product}
+                        src={items.picture}
                         alt={items.name}
                         className="card-img-top"
                         style={{ height: "180px", objectFit: "cover" }}
@@ -152,11 +153,7 @@ const MainHomePage = () => {
         </div>
       </div>
 
-      {!loading && (
-        <button onClick={() => scrollup()} className="back_to_top">
-          Back to Top
-        </button>
-      )}
+      {!loading && <ScrollToTop />}
     </div>
   );
 };
