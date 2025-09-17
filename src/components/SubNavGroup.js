@@ -1,4 +1,6 @@
-const NavGroupCategory = () => {
+import { t } from "i18next";
+
+const SubNavGroup = () => {
   const items = [
     "Toys & Game",
     "Kids Gift Guide",
@@ -18,7 +20,7 @@ const NavGroupCategory = () => {
               className="nav-link text-muted px-3"
               style={{ whiteSpace: "nowrap" }}
             >
-              {item}
+              {t(`${item}`)}
             </span>
           </li>
         ))}
@@ -27,4 +29,4 @@ const NavGroupCategory = () => {
   );
 };
 
-export default NavGroupCategory;
+export default SubNavGroup;

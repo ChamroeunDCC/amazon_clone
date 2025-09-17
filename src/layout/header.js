@@ -4,11 +4,20 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import SwitchLang from "../components/switch-lang/SwitchLang";
 import SwitchLangSheet from "../components/switch-lang/SwitchLangSheet";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items); // items from Redux slice
   const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  const lang = useSelector((state) => state.lang.lang);
+
+  useEffect(() => {
+    i18n.changeLanguage(lang === "EN" ? "en" : "kh");
+  }, [i18n, lang]);
 
   return (
     <header
@@ -34,8 +43,10 @@ const Header = () => {
           <div className="d-none d-md-flex">
             <i className="d-flex align-items-end fa-solid fa-location-dot me-1 mb-1"></i>
             <div className="d-flex flex-column">
-              <span className="txt-deliver text-secondary">Deliver to</span>
-              <span className="txt-country">Cambodia</span>
+              <span className="txt-deliver text-secondary">
+                {t("deliver_to")}
+              </span>
+              <span className="txt-country">{t("cambodia")}</span>
             </div>
           </div>
         </div>
@@ -51,17 +62,17 @@ const Header = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                All
+                {t(`All`)}
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item">New</button>
+                  <button className="dropdown-item">{t(`New`)}</button>
                 </li>
                 <li>
-                  <button className="dropdown-item">Clothes</button>
+                  <button className="dropdown-item">{t(`Clothes`)}</button>
                 </li>
                 <li>
-                  <button className="dropdown-item">Skin Care</button>
+                  <button className="dropdown-item">{t(`Skin Care`)}</button>
                 </li>
               </ul>
 
@@ -91,15 +102,17 @@ const Header = () => {
               href=""
               className="right_nav_item d-flex flex-column ms-4 mt-2 text-white"
             >
-              <span className="line-1">Hello, sign in</span>
-              <span className="line-2 dropdown-toggle">Account & Lists</span>
+              <span className="line-1">{t("hello_sigin")}</span>
+              <span className="line-2 dropdown-toggle">
+                {t("account_and_lists")}
+              </span>
             </div>
             <div
               href=""
               className="right_nav_item d-flex flex-column ms-4 mt-2 text-white"
             >
-              <span className="line-1">Returns</span>
-              <span className="line-2">&Orders</span>
+              <span className="line-1">{t("returns")}</span>
+              <span className="line-2">{t("orders")}</span>
             </div>
             <Link
               to="/shopping_cart"
@@ -129,7 +142,7 @@ const Header = () => {
                 </motion.span>
               </span>
               <div className="ms-2 mt-2">
-                <span className="line-2">Cart</span>
+                <span className="line-2">{t("cart")}</span>
               </div>
             </Link>
           </div>

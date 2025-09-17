@@ -1,11 +1,11 @@
 import ProductCategory from "../pages/product_category";
-import NavGroupCategory from "./nav_group_category";
+import SubNavGroup from "./SubNavGroup";
 
 const RelateCategory = () => {
   return (
     <>
       <div id="nav_relate_category">
-        <NavGroupCategory />
+        <SubNavGroup />
       </div>
       <div id="product_category">
         <ProductCategory />

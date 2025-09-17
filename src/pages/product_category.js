@@ -38,6 +38,7 @@ const ProductCategory = () => {
           style={{
             visibility: showSidebar ? "visible" : "hidden",
             transition: "visibility 0.3s ease",
+            overflow: "scroll",
           }}
         >
           <LeftAsideRelateCategory />

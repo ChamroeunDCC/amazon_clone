@@ -10,9 +10,11 @@
     "axios": "^1.5.1",
     "classnames": "^2.5.1",
     "framer-motion": "^12.23.12",
+    "i18next": "^25.5.2",
     "mdb-ui-kit": "^6.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^15.7.3",
     "react-icons": "^5.5.0",
     "react-image-magnify": "^2.7.4",
     "react-redux": "^9.2.0",
@@ -21,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0"
   }
 }

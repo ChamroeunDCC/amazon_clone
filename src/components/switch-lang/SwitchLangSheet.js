@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setLang } from "../../features/lang/langSLice";
+import { useTranslation } from "react-i18next";
 
 export default function SwitchLangSheet() {
   const lang = useSelector((state) => state.lang.lang);
@@ -7,6 +8,7 @@ export default function SwitchLangSheet() {
 
   const switchLanguage = (selected) => {
     dispatch(setLang(selected));
+
     if (typeof window !== "undefined") {
       localStorage.setItem("lang", selected);
     }

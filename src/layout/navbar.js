@@ -1,4 +1,13 @@
+import { t } from "i18next";
+
 const NavBar = () => {
+  const menuItems = [
+    "Today's Deals",
+    "Customer Service",
+    "Registry",
+    "Gift Cards",
+    "Sell",
+  ];
   return (
     <div id="nav_bar">
       <div
@@ -13,7 +22,7 @@ const NavBar = () => {
           data-bs-target="#offcanvasWithBothOptions"
           aria-controls="offcanvasWithBothOptions"
         >
-          <i className="fa-solid fa-bars"></i> All
+          <i className="fa-solid fa-bars"></i> {t(`All`)}
         </a>
 
         <div
@@ -28,7 +37,7 @@ const NavBar = () => {
             className="offcanvas-header text-white"
           >
             <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-              Hello, Dara
+              {t(`New`)}Hello, Dara
             </h5>
             <a data-bs-dismiss="offcanvas" aria-label="Close">
               <i className="fa-solid fa-xmark"></i>
@@ -36,25 +45,20 @@ const NavBar = () => {
           </div>
           <div className="offcanvas-body">
             <p>
-              Try scrolling the rest of the page to see this option in action.
+              {t(`New`)}Try scrolling the rest of the page to see this option in
+              action.
             </p>
           </div>
         </div>
-        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
-          Today's Deals
-        </a>
-        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
-          Customer Service
-        </a>
-        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
-          Registry
-        </a>
-        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
-          Gift Cards
-        </a>
-        <a className="btn_nav_bar" style={{ whiteSpace: "nowrap" }}>
-          Sell
-        </a>
+        {menuItems.map((item) => (
+          <a
+            key={item}
+            className="btn_nav_bar"
+            style={{ whiteSpace: "nowrap" }}
+          >
+            {t(`${item}`)}
+          </a>
+        ))}
       </div>
     </div>
   );
