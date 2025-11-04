@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import test_product from "../assets/test_product.jpg";
 import { Link } from "react-router-dom";
 import { fetchData } from "../util/helper";
-import ItachiSharingan from "./loading";
+import ItachiSharingan from "./LoadingItachiSharingan";
 import ScrollToTop from "./srollTotTop";
+import Loading2 from "./Loading2";
 
 const RightAsideRelateCategory = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -41,17 +42,17 @@ const RightAsideRelateCategory = () => {
               height: "calc(100vh - 200px)",
             }}
           >
-            <ItachiSharingan />
+            <Loading2 />
           </div>
         )}
 
-        <div className="group_items row gx-3 gy-3 w-100">
-          {dataProduct.map((items) => (
+        <div className="group_items row">
+          {dataProduct.map((items) => ( 
             <div
               key={items.id}
-              className="col-12 xs-col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2 d-flex justify-content-center border"
+              className="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xl-3 mt-2"
             >
-              <div className="cart">
+              <div className="cart border">
                 <div className="inner_cart p-2 d-flex flex-column h-100">
                   <Link
                     to={`/nav_relate_category/product_detail?id=${items.id}`}

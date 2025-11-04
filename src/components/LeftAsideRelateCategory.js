@@ -1,6 +1,6 @@
 export default function LeftAsideRelateCategory() {
   return (
-    <div className="left_aside_relate_category mt-3">
+    <div className="left_aside_relate_category d-none d-lg-block mt-3">
       <div className="inner_left_aside container">
         <h6 className="fw-bold">Department</h6>
         <ul>

@@ -97,7 +97,7 @@ const ShoppingCart = () => {
                   className="row border-bottom pb-3 mb-3 align-items-start"
                   key={item.id}
                 >
-                  <div className="col-12 col-md-4 text-center">
+                  <div className="col-12 col-md-6 text-center">
                     <img
                       className="img-fluid"
                       src={item.image || test_product}
@@ -105,7 +105,7 @@ const ShoppingCart = () => {
                       style={{ maxWidth: "200px" }}
                     />
                   </div>
-                  <div className="col-12 col-md-8">
+                  <div className="col-12 col-md-6">
                     <p className="mb-2">{item.name}</p>
                     <h6 className="mb-2 text-dark">
                       ${item.price ? Number(item.price).toFixed(2) : "0.00"}

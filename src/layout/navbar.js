@@ -1,7 +1,7 @@
 import { t } from "i18next";
 
-const NavBar = () => {
-  const menuItems = [
+export default function NavBar() {
+   const menuItems = [
     "Today's Deals",
     "Customer Service",
     "Registry",
@@ -64,4 +64,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+

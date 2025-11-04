@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavRelateCategory from "./components/nav_relate_category";
-import SingleProduct from "./pages/product_detail";
-import ShoppingCart from "./pages/shopping_cart";
-import MainHomePage from "./pages/main_homepage";
-import Layout from "./layout/layout";
+import MainHomePage from "./pages/MainHomePage";
+import ShoppingCart from "./pages/ShoppingCard";
+import ProductDetail from "./pages/ProductDetail";
+import RelateCategory from "./components/RelateCategory";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
           <Route path="/" element={<MainHomePage />} />
           <Route
             path="/nav_relate_category/product_detail"
-            element={<SingleProduct />}
+            element={<ProductDetail />}
           />
           <Route path="/shopping_cart" element={<ShoppingCart />} />
-          <Route path="/nav_relate_category" element={<NavRelateCategory />} />
+          <Route path="/nav_relate_category" element={<RelateCategory />} />
         </Route>
       </Routes>
     </BrowserRouter>

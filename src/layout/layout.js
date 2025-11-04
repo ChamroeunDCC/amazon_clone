@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "./header";
-import NavBar from "./navbar";
+import Header from "./Header";
 import MobileCartButton from "../components/MobileCartButton";
+import NavBar from "./NavBar";
 
 export default function Layout() {
   return (

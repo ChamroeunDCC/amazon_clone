@@ -3,9 +3,10 @@ import img_product from "../assets/single_product1.jpg";
 import ReactImageMagnify from "react-image-magnify";
 import { useEffect, useState } from "react";
 import { fetchData } from "../util/helper";
-import LoadingItachiSharingan from "../components/loading";
+import LoadingItachiSharingan from "../components/LoadingItachiSharingan";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
+import Loading2 from "../components/Loading2";
 
 const ProductDetail = () => {
   const [loading, setLoading] = useState(false);
@@ -72,7 +73,7 @@ const ProductDetail = () => {
         <div className="row g-4 justify-content-center">
           {loading ? (
             <div className="text-center py-5">
-              <LoadingItachiSharingan />
+              <Loading2 />
             </div>
           ) : (
             <>

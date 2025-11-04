@@ -1,4 +1,4 @@
-import ProductCategory from "../pages/product_category";
+import ProductCategory from "../pages/ProductCategory";
 import SubNavGroup from "./SubNavGroup";
 
 const RelateCategory = () => {

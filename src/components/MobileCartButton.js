@@ -9,7 +9,7 @@ export default function MobileCartButton() {
     <>
       {/* Floating button visible only on mobile (d-md-none) */}
       <button
-        className="btn btn-warning d-md-none position-fixed"
+        className="btn btn-warnin g d-lg-none position-fixed"
         style={{
           bottom: "20px",
           right: "20px",

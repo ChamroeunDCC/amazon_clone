@@ -1,6 +1,6 @@
 import { useState } from "react";
-import LeftAsideRelateCategory from "../components/left_aside_relate_category";
-import RightAsideRelateCategory from "../components/right_aside_relate_category";
+import LeftAsideRelateCategory from "../components/LeftAsideRelateCategory";
+import RightAsideRelateCategory from "../components/RightAsideRelateCategory";
 
 const ProductCategory = () => {
   const [showSidebar, setShowSidebar] = useState(false);
