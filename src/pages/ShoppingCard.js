@@ -1,3 +1,4 @@
+import { RxArrowLeft } from "react-icons/rx"; 
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeItem,
@@ -7,10 +8,12 @@ import {
 } from "../features/cart/cartSlice";
 import test_product from "../assets/test_product.jpg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
+  const navigate = useNavigate()
 
   const [showModal, setShowModal] = useState(false);
 
@@ -30,6 +33,10 @@ const ShoppingCart = () => {
       className="p-3"
       id="shopping_cart"
     >
+      <div onClick={()=>navigate(-1)} className="d-flex align-items-center cursor-pointer">
+        <RxArrowLeft />
+        <span className="ms-1" style={{fontSize: 14}}>Back</span>
+      </div>
       <div className="container">
         <div className="row">
           {/* Cart Items */}

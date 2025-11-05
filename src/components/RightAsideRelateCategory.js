@@ -30,7 +30,7 @@ const RightAsideRelateCategory = () => {
     <div id="right_aside_relate_category" className="container-fluid mt-3">
       <div className="inner_right_aside_relate_category">
         <h5 className="fw-bold text-dark">Results</h5>
-        <p style={{ fontSize: "14px", lineHeight: "10px" }}>
+        <p style={{ fontSize: "14px", lineHeight: "16px" }}>
           Price and other details may vary based on product size and color
         </p>
         {loading && (

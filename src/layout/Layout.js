@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import MobileCartButton from "../components/MobileCartButton";
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 export default function Layout() {
   return (
     <div>
       <Header />
-      <NavBar />
+      <NavBar  />
       <Outlet />
       <MobileCartButton />
     </div>

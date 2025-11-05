@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import amazon_logo from "../assets/logo/amazon_logo.png";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -10,7 +10,6 @@ import { useEffect } from "react";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items); // items from Redux slice
   const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
   const lang = useSelector((state) => state.lang.lang);
@@ -25,7 +24,7 @@ const Header = () => {
       className="px-3 text-white d-flex align-items-center p-2"
     >
       {/* Logo (Always Visible) */}
-      <div className="cursor-pointer me-3" onClick={() => navigate("/")}>
+      <div className="cursor-pointer me-3" >
         <img
           width={90}
           src={amazon_logo}
@@ -166,7 +165,7 @@ const Header = () => {
           </div>
           <button
             type="button"
-            className="btn-close text-reset"
+            className="btn-close btn-close-white text-reset"
             data-bs-dismiss="offcanvas"
           ></button>
         </div>
