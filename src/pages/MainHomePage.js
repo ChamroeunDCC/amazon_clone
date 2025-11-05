@@ -30,12 +30,6 @@ const MainHomePage = () => {
     getProduct();
   }, []);
 
-  const scrollup = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
-  };
   return (
     <div id="main_homepage">
       <div className="container w-100">

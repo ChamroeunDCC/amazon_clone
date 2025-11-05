@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function MobileCartButton() {
   const cart = useSelector((state) => state.cart.items);
+  const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
   const navigate = useNavigate();
 
   return (
@@ -26,14 +28,15 @@ export default function MobileCartButton() {
       >
         <span className="position-relative">
           <i className="fas fa-shopping-cart fa-lg"></i>
-          {cart.length > 0 && (
-            <span
-              className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-              style={{ fontSize: "12px" }}
-            >
-              {cart.length}
-            </span>
-          )}
+          <motion.span
+            key={cartCount} // triggers animation on value change
+            initial={{ x: 0 }}
+            animate={{ x: [0, -5, 5, -5, 5, 0] }} // shake animation
+            transition={{ duration: 0.4 }}
+            className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            {cartCount}
+          </motion.span>
         </span>
       </button>
     </>
