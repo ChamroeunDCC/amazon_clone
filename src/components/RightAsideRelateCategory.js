@@ -68,7 +68,7 @@ const RightAsideRelateCategory = () => {
           {dataProduct.map((item) => (
             <div
               key={item.id}
-              className="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-2 mt-2"
+              className="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3 mt-2"
             >
               <div className="cart border">
                 <div className="inner_cart p-2 d-flex flex-column h-100">
