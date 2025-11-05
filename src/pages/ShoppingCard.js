@@ -1,4 +1,4 @@
-import { RxArrowLeft } from "react-icons/rx"; 
+import { RxArrowLeft } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeItem,
@@ -9,17 +9,32 @@ import {
 import test_product from "../assets/test_product.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
 
   const handleConfirm = () => {
     dispatch(clearCart());
     setShowModal(false);
+  };
+
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: `Do you want to delete ${item.name}?`,
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      confirmButtonText: "Yes, Delete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+        dispatch(removeItem(item.id));
+      }
+    });
   };
 
   const subtotal = cart.reduce(
@@ -33,9 +48,14 @@ const ShoppingCart = () => {
       className="p-3"
       id="shopping_cart"
     >
-      <div onClick={()=>navigate(-1)} className="d-flex align-items-center cursor-pointer">
+      <div
+        onClick={() => navigate(-1)}
+        className="d-flex align-items-center cursor-pointer"
+      >
         <RxArrowLeft />
-        <span className="ms-1" style={{fontSize: 14}}>Back</span>
+        <span className="ms-1" style={{ fontSize: 14 }}>
+          Back
+        </span>
       </div>
       <div className="container">
         <div className="row">
@@ -139,7 +159,9 @@ const ShoppingCart = () => {
                     <button
                       className="btn btn-link text-danger p-0"
                       style={{ fontSize: "12px" }}
-                      onClick={() => dispatch(removeItem(item.id))}
+                      onClick={() => {
+                        handleDelete(item);
+                      }}
                     >
                       Delete
                     </button>

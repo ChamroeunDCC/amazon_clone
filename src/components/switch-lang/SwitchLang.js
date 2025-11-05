@@ -18,19 +18,25 @@ export default function SwitchLang() {
     position: "absolute",
     top: "100%",
     left: 0,
-    border: "1px solid #ddd",
-    borderRadius: "6px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
+    borderRadius: "10px",
+    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.2)",
     zIndex: 1000,
-    padding: "5px 0",
-    minWidth: "100px",
+    padding: "8px 0",
+    minWidth: "140px",
+    background: "rgba(255, 255, 255, 0.15)", // semi-transparent white
+    backdropFilter: "blur(10px)", // frosted blur effect
+    WebkitBackdropFilter: "blur(10px)", // Safari support
+    color: "#fff", // white text (for dark backgrounds)
   };
+
   const itemStyle = {
     display: "flex",
     alignItems: "center",
-    padding: "5px 10px",
+    padding: "8px 12px",
     cursor: "pointer",
-    transition: "background 0.2s",
+    transition: "background 0.3s ease",
+    borderRadius: "6px",
   };
 
   const switchLangHandler = (selected) => {
@@ -71,7 +77,12 @@ export default function SwitchLang() {
       </div>
 
       {open && (
-        <div style={dropdownStyle}>
+        <div
+          style={dropdownStyle}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "transparent")
+          }
+        >
           {Object.keys(flagMap)
             .filter((key) => key !== lang)
             .map((key) => (

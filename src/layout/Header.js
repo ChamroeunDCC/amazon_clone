@@ -1,18 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import amazon_logo from "../assets/logo/amazon_logo.png";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import SwitchLang from "../components/switch-lang/SwitchLang";
 import SwitchLangSheet from "../components/switch-lang/SwitchLangSheet";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const cart = useSelector((state) => state.cart.items); // items from Redux slice
   const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
   const lang = useSelector((state) => state.lang.lang);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [databstoggle, setdatabstoggle] = useState({
+    dataBsToggle: "",
+    dataBsTarget: "",
+  });
+
+  const handleClickLogo = () => {
+    if (location.pathname === "/") {
+      setdatabstoggle({
+        dataBsTarget: "#mobileMenu",
+        dataBsToggle: "offcanvas",
+      });
+    } else {
+      setdatabstoggle({
+        dataBsTarget: "",
+        dataBsToggle: "",
+      });
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     i18n.changeLanguage(lang === "EN" ? "en" : "kh");
@@ -21,17 +41,17 @@ const Header = () => {
   return (
     <header
       id="navbar_main"
-      className="px-3 text-white d-flex align-items-center p-2"
+      className="sticky-top px-3 text-white d-flex align-items-center p-2"
     >
       {/* Logo (Always Visible) */}
-      <div className="cursor-pointer me-3" >
+      <div className="cursor-pointer me-3">
         <img
           width={90}
           src={amazon_logo}
           alt="Amazon Logo"
-          // Mobile: open offcanvas instead of navigating
-          data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu"
+          onClick={handleClickLogo}
+          data-bs-toggle={databstoggle.dataBsToggle}
+          data-bs-target={databstoggle.dataBsTarget}
         />
       </div>
 

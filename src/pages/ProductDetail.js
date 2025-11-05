@@ -1,9 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import img_product from "../assets/single_product1.jpg";
 import ReactImageMagnify from "react-image-magnify";
 import { useEffect, useState } from "react";
 import { fetchData } from "../util/helper";
-import LoadingItachiSharingan from "../components/LoadingItachiSharingan";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
 import Loading2 from "../components/Loading2";
@@ -29,7 +27,7 @@ const ProductDetail = () => {
       description: singleData.description,
       price: singleData.price,
       qty: 1,
-      image: img_product,
+      image: singleData.picture,
     };
 
     dispatch(addItem(productToAdd));
@@ -72,7 +70,7 @@ const ProductDetail = () => {
 
         <div className="row g-4 justify-content-center">
           {loading ? (
-            <div className="text-center py-5">
+            <div className="d-flex justify-content-center text-center py-5">
               <Loading2 />
             </div>
           ) : (

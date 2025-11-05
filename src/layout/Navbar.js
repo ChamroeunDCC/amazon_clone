@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { t } from "i18next";
 
 export default function NavBar() {
-   const menuItems = [
+  const menuItems = [
     "Today's Deals",
     "Customer Service",
     "Registry",
@@ -16,11 +17,11 @@ export default function NavBar() {
       >
         <a
           style={{ whiteSpace: "nowrap" }}
-          className="btn_nav_bar"
+          className="btn_nav_bar cursor-pointer"
           type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasWithBothOptions"
-          aria-controls="offcanvasWithBothOptions"
+          // data-bs-toggle="offcanvas"
+          // data-bs-target="#offcanvasWithBothOptions"
+          // aria-controls="offcanvasWithBothOptions"
         >
           <i className="fa-solid fa-bars"></i> {t(`All`)}
         </a>
@@ -53,7 +54,7 @@ export default function NavBar() {
         {menuItems.map((item) => (
           <a
             key={item}
-            className="btn_nav_bar"
+            className="btn_nav_bar cursor-pointer"
             style={{ whiteSpace: "nowrap" }}
           >
             {t(`${item}`)}
@@ -62,6 +63,4 @@ export default function NavBar() {
       </div>
     </div>
   );
-};
-
-
+}

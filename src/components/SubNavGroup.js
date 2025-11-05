@@ -15,7 +15,7 @@ const SubNavGroup = () => {
     <nav className="nav_group bg-white border-bottom shadow-sm scroll">
       <ul className="nav d-flex flex-nowrap">
         {items.map((item, idx) => (
-          <li className="nav-item" key={idx}>
+          <li className="nav-item cursor-pointer" key={idx}>
             <span
               className="nav-link text-muted px-3"
               style={{ whiteSpace: "nowrap" }}

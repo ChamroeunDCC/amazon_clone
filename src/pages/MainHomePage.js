@@ -6,7 +6,6 @@ import banner4 from "../assets/banner/banner4.jpg";
 import { useNavigate } from "react-router-dom";
 import { fetchData } from "../util/helper";
 import noImage from "../assets/no_image.jpg";
-import ItachiSharingan from "../components/LoadingItachiSharingan";
 import ScrollToTop from "../components/srollTotTop";
 import Loading2 from "../components/Loading2";
 
